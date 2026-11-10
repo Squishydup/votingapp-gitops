@@ -4,7 +4,7 @@ metadata:
   name: vote-prod
   namespace: argocd
 spec:
-  project: default
+  project: voting
   source:
     repoURL: https://github.com/Squishydup/votingapp-gitops.git
     targetRevision: main
