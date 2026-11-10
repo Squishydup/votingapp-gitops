@@ -16,3 +16,25 @@ configMapGenerator:
   literals:
   - OPTION_A=Cats
   - OPTION_B=Dogs
+patches:
+- target:
+    labelSelector: app.kubernetes.io/name in (redis,db)
+  patch: |-
+    - op: add
+      path: /metadata/annotations
+      value:
+        argocd.argoproj.io/sync-wave: "0"
+- target:
+    labelSelector: app.kubernetes.io/name in (vote,result,worker)
+  patch: |-
+    - op: add
+      path: /metadata/annotations
+      value:
+        argocd.argoproj.io/sync-wave: "1"
+- target:
+    kind: Ingress
+  patch: |-
+    - op: add
+      path: /metadata/annotations
+      value:
+        argocd.argoproj.io/sync-wave: "2"
